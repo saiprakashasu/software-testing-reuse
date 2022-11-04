@@ -1,18 +1,22 @@
 package hacs;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  * Title: HACS Description: Copyright: Copyright (c) 2002 Company: msu
- * 
+ *
  * @author Zhang ji Zhu Wei
  * @version 1.0
  */
 
 public class SolutionGradingDlg extends JDialog {
-	Solution theSolution;
+	hacs.Solution theSolution;
 	JLabel jLabel1 = new JLabel();
 	JTextField tfGrad = new JTextField();
 	JButton buttonOK = new JButton();
@@ -47,16 +51,16 @@ public class SolutionGradingDlg extends JDialog {
 		this.getContentPane().add(buttonOK, null);
 	}
 
-	void show(Solution solution) {
+	void show(hacs.Solution solution) {
 		theSolution = solution;
 		tfGrad.setText("" + theSolution.getGradeInt());
-		labelSolutionFileName.setText(theSolution.SolutionFileName);
-		show();
+		labelSolutionFileName.setText(theSolution.solutionFileName);
+		setVisible(true);
 	}
 
 	void buttonOK_actionPerformed(ActionEvent e) {
 		theSolution.theGrade = Integer.parseInt(tfGrad.getText());
-		hide();
+		setVisible(false);
 	}
 
 }

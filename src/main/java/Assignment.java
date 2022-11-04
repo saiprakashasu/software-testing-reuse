@@ -9,90 +9,78 @@ package hacs;
  * @version 1.0
  */
 
-import java.util.*;
 import java.text.DateFormat;
+import java.util.Date;
 
 public class Assignment {
 
-  protected String AssName;
-  protected String strAssignmentFilename;
-  protected Date DueDate=new Date();
-  protected String AssSpec;
-  protected SolutionList theSolutionList=new SolutionList();
-  protected Solution SuggestSolution=new Solution();
-
-
+  protected String assignmentName;
+  protected String strAssignmentFileName;
+  protected Date dueDate = new Date();
+  protected String assignmentSpec;
+  protected hacs.SolutionList theSolutionList = new hacs.SolutionList();
+  protected hacs.Solution suggestedSolution = new hacs.Solution();
 
   public Assignment() {
   }
 
-  public void SetDueDate(Date theDueDate){
-    this.DueDate = theDueDate;
+  public void setDueDate(Date theDueDate) {
+    this.dueDate = theDueDate;
   }
 
-  public void SetAssSpec(String theSpec){
-    this.AssSpec = theSpec;
+  public void setAssignmentSpec(String theSpec) {
+    this.assignmentSpec = theSpec;
   }
 
-  public boolean IsOverDue(){
+  public boolean isOverDue() {
     Date today;
     today = new Date();
-    if (today.after(this.DueDate)) {
-      return true;
-    }
-    else {
-      return false;
-    }
+    return today.after(this.dueDate);
   }
 
-  public Solution AddSolution(){
-    Solution mySolution = new Solution();
+  public hacs.Solution addSolution() {
+    hacs.Solution mySolution = new hacs.Solution();
     return mySolution;
   }
 
-  ////add the theSolution to the Solutionlist
-  public void AddSolution(Solution theSolution)
-  {
+  //// add the theSolution to the Solutionlist
+  public void addSolution(hacs.Solution theSolution) {
     theSolutionList.add(theSolution);
   }
 
-  public void SubmitSolution(){
+  public void submitSolution() {
   }
 
-  public void getSolutionList(){
+  public void getSolutionList() {
   }
 
-  /* return the solution of the give name
-  */
-  public Solution getSolution(String studentname)
-  {
-    SolutionIterator Iterator=(SolutionIterator)theSolutionList.iterator();
-    return (Solution)Iterator.next(studentname);
+  /*
+   * return the solution of the give name
+   */
+  public hacs.Solution getSolution(String studentName) {
+    hacs.SolutionIterator Iterator = new hacs.SolutionIterator(theSolutionList);
+    return Iterator.next(studentName);
   }
 
-  public Solution getSugSolution(){
-    return SuggestSolution;
+  public hacs.Solution getSuggestedSolution() {
+    return suggestedSolution;
   }
 
-  public SolutionIterator GetSolutionIterator()
-  {
-    SolutionIterator theSolutionIterator=new SolutionIterator(theSolutionList);
+  public hacs.SolutionIterator getSolutionIterator() {
+    hacs.SolutionIterator theSolutionIterator = new hacs.SolutionIterator(theSolutionList);
     return theSolutionIterator;
   }
 
-  public String toString()
-  {
-    return AssName;
+  public String toString() {
+    return assignmentName;
   }
 
-  public String getDueDateString()
-  {
-    DateFormat dateFormat=DateFormat.getDateInstance(DateFormat.SHORT);
-    return  dateFormat.format(DueDate);
+  public String getDueDateString() {
+    DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
+    return dateFormat.format(dueDate);
   }
 
-  public void accept(NodeVisitor visitor)
-  {
+  public void accept(hacs.NodeVisitor visitor) {
     visitor.visitAssignment(this);
   }
 }

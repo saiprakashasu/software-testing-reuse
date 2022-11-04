@@ -1,0 +1,7 @@
+aaaa:SER515
+aaaa:SER502
+bbbb:SER515
+bbbb:CSE563
+professor1:SER515
+professor1:SER502
+professor1:CSE563

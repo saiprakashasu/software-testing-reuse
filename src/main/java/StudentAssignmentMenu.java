@@ -1,24 +1,21 @@
 package hacs;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.util.*;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.util.Date;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  * Title: HACS Description: Copyright: Copyright (c) 2002 Company: msu
- * 
+ *
  * @author Zhang ji Zhu Wei
  * @version 1.0
  */
 
-public class StudentAssignmentMenu extends AssignmentMenu {
-
-////  class AssignmentMenu
-	private boolean boolSubmit = false;
-	private Solution theSolution;
-	private Assignment theAssignment;
+public class StudentAssignmentMenu extends hacs.AssignmentMenu {
 
 	JLabel lAssignmentName = new JLabel();
 	JLabel lDueDate = new JLabel();
@@ -27,12 +24,15 @@ public class StudentAssignmentMenu extends AssignmentMenu {
 	JLabel lGrade = new JLabel();
 	JButton bSubmit = new JButton();
 	JButton bCancel = new JButton();
-
 	JLabel jLabel1 = new JLabel();
 	JLabel jLabel3 = new JLabel();
 	JLabel jLabel5 = new JLabel();
 	JLabel jLabel6 = new JLabel();
 	JLabel jLabel7 = new JLabel();
+	////  class AssignmentMenu
+	private boolean boolSubmit = false;
+	private hacs.Solution theSolution;
+	private hacs.Assignment theAssignment;
 
 	public StudentAssignmentMenu() {
 		try {
@@ -96,44 +96,44 @@ public class StudentAssignmentMenu extends AssignmentMenu {
 	 * check if the student has already had a solution or not. if not , create a new
 	 * solution for the student. after showing the solution attatch the soluiton;
 	 */
-	public void ShowMenu(Assignment assignment, Person thePerson) {
+	public void showMenu(hacs.Assignment assignment, hacs.Person thePerson) {
 		theAssignment = assignment;
-		SolutionIterator theIter = theAssignment.GetSolutionIterator();
-		theSolution = (Solution) theIter.next(thePerson.UserName);
+		hacs.SolutionIterator theIter = theAssignment.getSolutionIterator();
+		theSolution = theIter.next(thePerson.UserName);
 		if (theSolution == null) {
 			tbSolution.setText("");
 			lGrade.setText("-1");
 		} else {
-			tbSolution.setText(theSolution.SolutionFileName);
+			tbSolution.setText(theSolution.solutionFileName);
 			lGrade.setText(theSolution.getGradeString());
 
 		}
 
-		lAssignmentName.setText(theAssignment.AssName);
-		lDueDate.setText(theAssignment.DueDate.toString());
-		lSuggestedSolution.setText(theAssignment.SuggestSolution.SolutionFileName);
+		lAssignmentName.setText(theAssignment.assignmentName);
+		lDueDate.setText(theAssignment.dueDate.toString());
+		lSuggestedSolution.setText(theAssignment.suggestedSolution.solutionFileName);
 
-		show();
+		setVisible(true);
 
 		if (boolSubmit == true) {
 			if (theSolution == null) {
-				theSolution = new Solution();
-				theAssignment.AddSolution(theSolution);
+				theSolution = new hacs.Solution();
+				theAssignment.addSolution(theSolution);
 			}
 			theSolution.theAuthor = thePerson.UserName;
-			theSolution.SolutionFileName = tbSolution.getText();
+			theSolution.solutionFileName = tbSolution.getText();
 			theSolution.theSubmitData = new Date();
 		}
 	}
 
 	void bSubmit_actionPerformed(ActionEvent e) {
 		boolSubmit = true;
-		hide();
+		setVisible(false);
 	}
 
 	void bCancel_actionPerformed(ActionEvent e) {
 		boolSubmit = false;
-		hide();
+		setVisible(false);
 	}
 
 }
