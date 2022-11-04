@@ -15,13 +15,13 @@ import java.util.ArrayList;
 public class Course {
   public ArrayList<hacs.Assignment> assignmentList = new ArrayList<hacs.Assignment>();
   String courseName;
-  int numOfAss;
+  int numOfAssignment;
   int courseLevel;
 
   public Course(String strCourse, int theLevel) {
     this.courseName = strCourse;
     this.courseLevel = theLevel;
-    this.numOfAss = 0;
+    this.numOfAssignment = 0;
   }
 
   public void addAssignment(hacs.Assignment newAss) {
